@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: "mongo"
+
+  mongo-express:
+    image: "mongo-express"
+    depends_on:
+      - mongo
+    ports:
+      - 8081:8081
+
+  app:
+    build: .
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
