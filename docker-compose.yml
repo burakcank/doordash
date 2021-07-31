@@ -3,6 +3,7 @@ version: "3.9"
 services:
   mongo:
     image: "mongo"
+    restart: always
 
   mongo-express:
     image: "mongo-express"
@@ -11,9 +12,20 @@ services:
     ports:
       - 8081:8081
 
-  app:
-    build: .
+  backend:
+    build: backend
     depends_on:
       - mongo
     volumes:
-      - .:/app
+      - ./backend:/backend
+    ports:
+      - 5000:5000
+
+  frontend:
+    build: frontend
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/frontend
+    ports:
+      - 3000:3000

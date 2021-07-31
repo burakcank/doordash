@@ -1,2 +1,4 @@
+Faker
+Flask
 psycopg2
 pymongo
